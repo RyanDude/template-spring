@@ -14,4 +14,10 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String roles;
+    @ManyToOne
+    @JoinColumn
+    private Usr usr;
+    public Role(Usr usr){
+        this.usr = usr;
+    }
 }
