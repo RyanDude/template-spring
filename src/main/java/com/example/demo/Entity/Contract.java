@@ -1,4 +1,4 @@
 package com.example.demo.Entity;
 
-public class SalesContract {
+public class Contract {
 }

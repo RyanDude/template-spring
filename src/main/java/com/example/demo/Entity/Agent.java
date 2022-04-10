@@ -25,6 +25,8 @@ public class Agent {
     @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL)
     @JsonIgnore
     List<Partner> partners = new ArrayList<>();
-
+    @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL)
+    @JsonIgnore
+    List<Customer> customers = new ArrayList<>();
 
 }
