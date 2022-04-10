@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "branch_office")
+@Table(name = "Office")
 @Data
 public class BranchOffice {
     @Id
@@ -19,7 +19,7 @@ public class BranchOffice {
     private String manager;
     private String phone;
     private String RespArea;
-    @OneToMany(mappedBy = "branch_office")
+    @OneToMany(mappedBy = "branchOffice", cascade = CascadeType.ALL)
     @JsonIgnore
     List<Agent> agents = new ArrayList<>();
 
