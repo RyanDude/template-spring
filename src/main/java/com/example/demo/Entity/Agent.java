@@ -16,6 +16,12 @@ public class Agent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String name;
+    private String gender;
+    private String BirthDate;
+    private String address;
+    private int YrExp;
+    private String TransRecord;
     @ManyToOne
     @JoinColumn
     private BranchOffice branchOffice;
