@@ -14,6 +14,7 @@ public class SchoolDistrict {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String name;
     private int AvgRating;
     @OneToMany(mappedBy = "schoolDistrict",cascade = CascadeType.ALL)
     @JsonIgnore

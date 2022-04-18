@@ -30,7 +30,7 @@ public class Agent {
     }
     @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL)
     @JsonIgnore
-    List<Partner> partners = new ArrayList<>();
+    List<Corporate> corporates = new ArrayList<>();
     @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL)
     @JsonIgnore
     List<Customer> customers = new ArrayList<>();

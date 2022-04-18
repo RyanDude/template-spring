@@ -25,15 +25,15 @@ public class House {
     private double tax;
     @OneToMany(mappedBy = "house", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Contract> contracts = new ArrayList<>();
+    private List<sell> sells = new ArrayList<>();
+    @OneToMany(mappedBy = "house", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<buy> buys = new ArrayList<>();
     @ManyToOne
     @JoinColumn
     private Community community;
-    @ManyToOne
-    @JoinColumn
-    private Seller seller;
-    public House(Community community, Seller seller){
+
+    public House(Community community){
         this.community = community;
-        this.seller = seller;
     }
 }

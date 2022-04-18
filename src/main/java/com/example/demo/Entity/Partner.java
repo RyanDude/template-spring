@@ -1,9 +1,12 @@
 package com.example.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "partner")
@@ -17,11 +20,10 @@ public class Partner {
     private String Expertise;
     private String Phone;
     private String YrExp;
-    @ManyToOne
-    @JoinColumn
-    private Agent agent;
-    public Partner(Agent agent, PartnerTeams partnerTeams){
-        this.agent = agent;
+    @OneToMany(mappedBy = "partner")
+    @JsonIgnore
+    private List<Corporate> corporate = new ArrayList<>();
+    public Partner(PartnerTeams partnerTeams){
         this.partnerTeams = partnerTeams;
     }
     @ManyToOne
