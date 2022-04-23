@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <script th:src="@{lib/jquery.js}"></script>
+    <script th:src="@{js/jquery.cookie.js}"></script>
+</head>
+<body>
+Hello, world
+</body>
+<!-- search specific record -->
+<div>
+    <p id = 'usr'></p>
+    <input type="text" id="num" name="num">
+    <button onclick="get_usr()">submit</button>
+</div>
+<script>
+
+    function get_usr(){
+        let id = document.getElementById('num').value;
+        console.log(id);
+        $.ajax({
+            type: 'POST',
+            url: '/usr/'+id,
+            contentType: 'application/json',
+            data: JSON.stringify({}),
+            dataType: "json",
+            success: function (data) {
+                //need to change
+                var obj=data;
+                var html="user:<br><br>";
+                var username = obj.username;
+                var firstname = obj.firstname;
+                var lastname = obj.lastname;
+                    html+="username: "+username
+                        +"<br>"
+                        +"firstname: "+firstname
+                        +"<br>"
+                        +"lastname: "+lastname
+                        +"<br>________________________"
+
+                $("#usr").html(html)
+            },
+            error: function (data) {
+                alert("wrong");
+            }
+    })}
+</script>
+</html>
