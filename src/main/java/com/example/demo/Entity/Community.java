@@ -24,9 +24,9 @@ public class Community {
     private List<House> houses = new ArrayList<>();
     @ManyToOne
     @JoinColumn
-    private SchoolDistrict schoolDistrict;
-    public Community(SchoolDistrict schoolDistrict){
-        this.schoolDistrict = schoolDistrict;
+    private School school;
+    public Community(School school){
+        this.school = school;
     }
 
 }

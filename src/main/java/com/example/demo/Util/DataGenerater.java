@@ -1,9 +1,5 @@
 package com.example.demo.Util;
 
-import com.example.demo.Entity.SchoolDistrict;
-
-import java.util.List;
-
 public class DataGenerater {
     // random generate data
     // school district

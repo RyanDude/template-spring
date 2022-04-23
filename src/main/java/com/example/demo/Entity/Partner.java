@@ -23,11 +23,6 @@ public class Partner {
     @OneToMany(mappedBy = "partner")
     @JsonIgnore
     private List<Corporate> corporate = new ArrayList<>();
-    public Partner(PartnerTeams partnerTeams){
-        this.partnerTeams = partnerTeams;
-    }
-    @ManyToOne
-    @JoinColumn
-    private PartnerTeams partnerTeams;
+
 
 }

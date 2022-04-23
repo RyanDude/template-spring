@@ -21,7 +21,7 @@ public class Agent {
     private String BirthDate;
     private String address;
     private int YrExp;
-    private String TransRecord;
+    private String phone;
     @ManyToOne
     @JoinColumn
     private BranchOffice branchOffice;

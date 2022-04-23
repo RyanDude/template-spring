@@ -18,10 +18,8 @@ public class SaleContract {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private Date date;
-    private double price;
-    private String mortgage_company;
-    private String financial_professionals;
-    private Date close_data;
+    private double sold_price;
+    private String payment_method;
     @OneToMany(mappedBy = "saleContract", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<sell> sells = new ArrayList<>();

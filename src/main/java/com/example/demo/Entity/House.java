@@ -17,9 +17,12 @@ public class House {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String Address;
+    private String county;
     private String type;
     private double ListPrice;
-    private String offers;
+    private String status;
+    private int offers;
+    private int sqft;
     private int NumOfBed;
     private int NumOfBath;
     private double tax;

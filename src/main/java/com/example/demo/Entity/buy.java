@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class buy {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @ManyToOne
     @JoinColumn
