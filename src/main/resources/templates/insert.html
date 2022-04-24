@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- HTML !-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <script th:src="@{lib/jquery.js}"></script>
+    <script th:src="@{js/jquery.cookie.js}"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #04AA6D;
+            color: white;
+        }
+        input{
+            width: 500px;
+            margin-left: 10%;
+            margin-bottom: 10px;
+            height: 30px;
+            position: relative;
+            border: 2px solid #cdcdcd;
+            border-color: rgba(0, 0, 0, .14);
+            background-color: AliceBlue;
+            font-size: 14px;
+        }
+        button {
+            margin-left: 10%;
+            background-color: #e1ecf4;
+            border-radius: 3px;
+            border: 1px solid #7aa7c7;
+            box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
+            box-sizing: border-box;
+            color: #39739d;
+            cursor: pointer;
+            display: inline-block;
+            font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1.15385;
+            outline: none;
+            padding: 8px .8em;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: baseline;
+            white-space: nowrap;
+        }
+
+        button:hover,
+        button:focus {
+            background-color: #b3d3ea;
+            color: #2c5777;
+        }
+
+        button:focus {
+            box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+        }
+
+        button:active {
+            background-color: #a0c7e4;
+            box-shadow: none;
+            color: #2c5777;
+        }
+
+    </style>
+</head>
+<body>
+<div class="topnav">
+    <a href="/">Home</a>
+    <a class="active" href="/insert">insert new data</a>
+    <a href="/update">update info</a>
+    <a href="/all">show all tables in DB</a>
+</div>
+<h1>INSERT FUNCTIONS</h1>
+<div>
+    <input type="text" id="customer" name="customer" placeholder="attribute1:value1,attribute2:value2, ...">
+    <br/>
+    <button onclick="insert_customer()">insert customer</button>
+    <br/><br>
+
+    <input type="text" id="house" name="house" placeholder="attribute1:value1,attribute2:value2, ...">
+    <br/>
+    <button onclick="insert_house()">insert house</button>
+    <br/><br/>
+
+    <input type="text" id="agent" name="agent" placeholder="attribute1:value1,attribute2:value2, ...">
+    <br/>
+    <button onclick="insert_agent()">insert agent</button>
+    <br/><br/>
+
+    <input type="text" id="school" name="school" placeholder="attribute1:value1,attribute2:value2, ...">
+    <br/>
+    <button onclick="insert_school()">insert school</button>
+    <br/><br/>
+
+    <input type="text" id="partner" name="partner" placeholder="attribute1:value1,attribute2:value2, ...">
+    <br/>
+    <button onclick="insert_partner()">insert partner</button>
+    <br/><br/>
+
+    <input type="text" id="cor" name="cor" placeholder="agent:agent_id,partner:partner_id">
+    <br/>
+    <button onclick="insert_cor()">insert the relation between partner and agent</button>
+    <br/><br/>
+
+    <input type="text" id="sale_contract" name="sale_contract" placeholder="attribute1:value1,attribute2:value2, ...">
+    <br/>
+    <button onclick="sale_contract()">insert sale contract</button>
+    <br/><br/>
+
+    <input type="text" id="sell" name="sell" placeholder="house:house_id,saleContract:saleContract_id">
+    <br/>
+    <button onclick="sell()">insert the relation between sale contract and house</button>
+    <br/><br/>
+</div>
+</body>
+<script>
+    function sell(){
+        let sale = document.getElementById('sell').value;
+        console.log(sale);
+        $.ajax({
+            type: 'POST',
+            url: '/savesell/'+sale,
+            contentType: 'application/json',
+            data: JSON.stringify({}),
+            dataType: "text",
+            success: function (data) {
+                alert(data);
+            },
+            error: function (data) {
+                alert("pls check grammar");
+            }
+        })}
+    function sale_contract(){
+        let sale = document.getElementById('sale_contract').value;
+        console.log(sale);
+        $.ajax({
+            type: 'POST',
+            url: '/savecorscontract/'+sale,
+            contentType: 'application/json',
+            data: JSON.stringify({}),
+            dataType: "text",
+            success: function (data) {
+                alert(data);
+            },
+            error: function (data) {
+                alert("pls check grammar");
+            }
+        })}
+    function insert_cor(){
+        let cor = document.getElementById('cor').value;
+        console.log(cor);
+        $.ajax({
+            type: 'POST',
+            url: '/savecor/'+cor,
+            contentType: 'application/json',
+            data: JSON.stringify({}),
+            dataType: "text",
+            success: function (data) {
+                alert(data);
+            },
+            error: function (data) {
+                alert("pls check grammar");
+            }
+        })}
+    function insert_partner(){
+        let partner = document.getElementById('partner').value;
+        console.log(partner);
+        $.ajax({
+            type: 'POST',
+            url: '/savepartner/'+partner,
+            contentType: 'application/json',
+            data: JSON.stringify({}),
+            dataType: "text",
+            success: function (data) {
+                alert(data);
+            },
+            error: function (data) {
+                alert("pls check grammar");
+            }
+        })}
+    function insert_school(){
+        let school = document.getElementById('school').value;
+        console.log(school);
+        $.ajax({
+            type: 'POST',
+            url: '/saveschool/'+school,
+            contentType: 'application/json',
+            data: JSON.stringify({}),
+            dataType: "text",
+            success: function (data) {
+                alert(data);
+            },
+            error: function (data) {
+                alert("pls check grammar");
+            }
+        })}
+
+    function insert_house(){
+        let house = document.getElementById('house').value;
+        console.log(house);
+        $.ajax({
+            type: 'POST',
+            url: '/savehouse/'+house,
+            contentType: 'application/json',
+            data: JSON.stringify({}),
+            dataType: "text",
+            success: function (data) {
+                alert(data);
+            },
+            error: function (data) {
+                alert("pls check grammar");
+            }
+        })}
+    function insert_customer(){
+        let customer = document.getElementById('customer').value;
+        console.log(customer);
+        $.ajax({
+            type: 'POST',
+            url: '/savecus/'+customer,
+            contentType: 'application/json',
+            data: JSON.stringify({}),
+            dataType: "text",
+            success: function (data) {
+                alert(data);
+            },
+            error: function (data) {
+                alert("pls check grammar");
+            }
+        })}
+    function insert_agent(){
+        let agent = document.getElementById('agent').value;
+        console.log(agent);
+        $.ajax({
+            type: 'POST',
+            url: '/saveagent/'+agent,
+            contentType: 'application/json',
+            data: JSON.stringify({}),
+            dataType: "text",
+            success: function (data) {
+                alert(data);
+            },
+            error: function (data) {
+                alert("pls check grammar");
+            }
+        })}
+</script>
+</html>

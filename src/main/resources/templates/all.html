@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Main</title>
+  <script th:src="@{lib/jquery.js}"></script>
+  <script th:src="@{js/jquery.cookie.js}"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .topnav {
+      overflow: hidden;
+      background-color: #333;
+    }
+
+    .topnav a {
+      float: left;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+
+    .topnav a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    .topnav a.active {
+      background-color: #04AA6D;
+      color: white;
+    }
+
+  </style>
+</head>
+<body>
+<div class="topnav">
+  <a href="/">Home</a>
+  <a href="/insert">insert new data</a>
+  <a href="/update">update info</a>
+  <a class="active" href="/">show all tables in DB</a>
+</div>
+<p id = 'agent'></p>
+<p id = 'house'></p>
+<p id = 'cor'></p>
+<p id = 'cus'></p>
+<p id = 'sell'></p>
+<p id = 'buy'></p>
+</body>
+<script>
+  $(function () {
+    show_agent();
+    show_house();
+    show_cor();
+    show_customer();
+    show_sell();
+    show_buy();
+  })
+  function show_buy(){
+    $.ajax({
+      type: 'POST',
+      url: '/allbuy',
+      contentType: 'application/json',
+      data: JSON.stringify({}),
+      dataType: "json",
+      success: function (data) {
+        console.log(data);
+        var obj=data;
+        var html="<h1>Purchase Record</h1><br><br>";
+        for(let i = 0; i < obj.length; ++i){
+          var house = obj[i].house;
+          var purchaseContract = obj[i].purchaseContract;
+          var price = purchaseContract.price;
+          var date = purchaseContract.date;
+          var mortgage_company = purchaseContract.mortgage_company;
+          var hid = house.id;
+          var address = house.address+","+house.county;
+
+          html+=
+                  "<br>"
+                  +"date: "+date
+                  +"<br/>house id#: "+hid
+                  +"<br/>house addr: "+address
+                  +"<br/>price: "+price
+                  +"<br/>mortgage_company: "+mortgage_company
+                  +"<br>__________________________________________________________________________________________________________________________________________________________________<br/>"
+        }
+        $("#buy").html(html)
+      },
+      error: function (data) {
+        alert("wrong");
+      }
+    })}
+  function show_sell(){
+    $.ajax({
+      type: 'POST',
+      url: '/allsell',
+      contentType: 'application/json',
+      data: JSON.stringify({}),
+      dataType: "json",
+      success: function (data) {
+        console.log(data);
+        var obj=data;
+        var html="<h1>Sale Record</h1><br><br>";
+        for(let i = 0; i < obj.length; ++i){
+          var house = obj[i].house;
+          var saleContract = obj[i].saleContract;
+          var sold_price = saleContract.sold_price;
+          var date = saleContract.date;
+          var payment_method = saleContract.payment_method;
+          var hid = house.id;
+          var address = house.address+","+house.county;
+
+          html+=
+                  "<br>"
+                  +"date: "+date
+                  +"<br/>house id#: "+hid
+                  +"<br/>house addr: "+address
+                  +"<br/>payment_method: "+payment_method
+                  +"<br/>sold_price: "+sold_price
+                  +"<br>__________________________________________________________________________________________________________________________________________________________________<br/>"
+        }
+        $("#sell").html(html)
+      },
+      error: function (data) {
+        alert("wrong");
+      }
+    })}
+  function show_customer(){
+    $.ajax({
+      type: 'POST',
+      url: '/allcus',
+      contentType: 'application/json',
+      data: JSON.stringify({}),
+      dataType: "json",
+      success: function (data) {
+        console.log(data);
+        var obj=data;
+        var html="<h1>Customers</h1><br><br>";
+        for(let i = 0; i < obj.length; ++i){
+          var name = obj[i].name;
+          var MaritalStatus = obj[i].maritalStatus;
+          var phone = obj[i].phone;
+          var email = obj[i].email;
+          html+="customer name: "+name
+                  +"<br>"
+                  +"MaritalStatus: "+MaritalStatus
+                  +"<br/>email: "+email
+                  +"<br/>phone: "+phone
+                  +"<br>__________________________________________________________________________________________________________________________________________________________________<br/>"
+        }
+        $("#cus").html(html)
+      },
+      error: function (data) {
+        alert("wrong");
+      }
+    })}
+  function show_cor(){
+    $.ajax({
+      type: 'POST',
+      url: '/allcor',
+      contentType: 'application/json',
+      data: JSON.stringify({}),
+      dataType: "json",
+      success: function (data) {
+        console.log(data);
+        var obj=data;
+        var html="<h1>Corporation</h1>:<br><br>";
+        for(let i = 0; i < obj.length; ++i){
+          var Agent = obj[i].agent;
+          var partner = obj[i].partner;
+          let aname = Agent.name;
+          let pname = partner.name;
+          let Expertise = Agent.expertise;
+          let phone = Agent.phone;
+          let yrExp = Agent.yrExp;
+          html+="agent "+aname+"is corparate with"
+                  +"partner "+pname+" whose Expertise and phone are "+Expertise+" and "+phone+" with "+yrExp+" years experience"
+                  +"<br>__________________________________________________________________________________________________________________________________________________________________<br/>"
+        }
+        $("#cor").html(html)
+      },
+      error: function (data) {
+        alert("wrong");
+      }
+    })}
+  function show_house(){
+    $.ajax({
+      type: 'POST',
+      url: '/allhouse',
+      contentType: 'application/json',
+      data: JSON.stringify({}),
+      dataType: "json",
+      success: function (data) {
+        console.log(data);
+        //need to change
+        var obj=data;
+        var html="<h1>House Info</h1>:<br><br>";
+        for(let i = 0; i < obj.length; ++i){
+          var Address = obj[i].address;
+          var county = obj[i].county;
+          var type = obj[i].type;
+          var ListPrice = obj[i].listPrice;
+          var offers = obj[i].offers;
+          var status = obj[i].status;
+          var sqft = obj[i].sqft;
+          var NumOfBed = obj[i].numOfBed;
+          var NumOfBath = obj[i].numOfBath;
+          var community = obj[i].community;
+          var school = community.school;
+          var facility = community.facility;
+          var hoafee = community.hoafee;
+          var cname = community.name;
+
+          var elementary = school.elementary;
+          var e_rating = school.e_rating;
+          var high_school = school.high_school;
+          var h_rating = school.h_rating;
+          var middle_school = school.middle_school;
+          var m_rating = school.middle_school;
+          html+="House info: "
+                  +"<br>"
+                  +"Address: "+Address+","+county
+                  +"<br/>type: "+type
+                  +"<br/>ListPrice: "+ListPrice
+                  +"<br/>offers: "+offers
+                  +"<br/>status: "+status
+                  +"<br/>sqft: "+sqft
+                  +"<br/>NumOfBed: "+NumOfBed
+                  +"<br/>NumOfBath: "+NumOfBath
+                  +"<br/>community: "+"[community name:"+cname+",hoafee:"+hoafee+",facility:"+facility+"]"
+                  +"<br/>school: "+"[elementary:"+elementary+",e_rating:"+e_rating+",high_school:"+high_school
+                  +"h_rating:"+h_rating+",middle_school:"+middle_school+",m_rating:"+m_rating+"]"
+                  +"<br>__________________________________________________________________________________________________________________________________________________________________<br/>"
+        }
+        $("#house").html(html)
+      },
+      error: function (data) {
+        alert("wrong");
+      }
+    })}
+  function show_agent(){
+    $.ajax({
+      type: 'POST',
+      url: '/allagent',
+      contentType: 'application/json',
+      data: JSON.stringify({}),
+      dataType: "json",
+      success: function (data) {
+        console.log(data);
+        var obj=data;
+        var html="<h1>agent</h1>:<br><br>";
+        for(let i = 0; i < obj.length; ++i){
+          var name = obj[i].name;
+          var gender = obj[i].gender;
+          var address = obj[i].address;
+          var yrexp = obj[i].yrExp;
+          var phone = obj[i].phone;
+          var branchOffice = obj[i].branchOffice;
+          var baddress = branchOffice.address;
+          var manager = branchOffice.manager;
+          var bname = branchOffice.name;
+          var bphone = branchOffice.phone;
+          var respArea = branchOffice.respArea;
+          html+="agent name: "+name
+                  +"<br>"
+                  +"gender: "+gender
+                  +"<br/>address: "+address
+                  +"<br/>YrExp: "+yrexp
+                  +"<br/>phone: "+phone
+                  +"<br/>belongs to branchOffice: [address:"+baddress+",manager:"+manager+",bname:"+bname+",bphone:"+bphone+",respArea:"+respArea
+                  +"<br>__________________________________________________________________________________________________________________________________________________________________<br/>"
+        }
+        $("#agent").html(html)
+      },
+      error: function (data) {
+        alert("wrong");
+      }
+    })}
+</script>
+</html>

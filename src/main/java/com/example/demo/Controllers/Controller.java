@@ -8,4 +8,16 @@ public class Controller {
     public String to_main(){
         return "main";
     }
+    @RequestMapping("/insert")
+    public String insert(){
+        return "insert";
+    }
+    @RequestMapping("/all")
+    public String all(){
+        return "all";
+    }
+    @RequestMapping("/update")
+    public String update(){
+        return "update";
+    }
 }
