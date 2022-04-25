@@ -131,8 +131,137 @@
 <br/><br>
 <p id = 'fivep'></p>
 
+<p>6.Retrieving the name of mortgage company, and the number of customers it serves.</p>
+<button onclick="search_six()">search</button>
+<br/><br>
+<p id = 'sixp'></p>
+
+<p>7.Analysizing payment method preference: </p>
+<button onclick="search_seven()">search</button>
+<br/><br>
+<p id = 'sevenp'></p>
+
+<p>8.Checking the Selling and Purchasing transaction of each Branch office </p>
+<button onclick="search_eight()">search</button>
+<br/><br>
+<p id = 'eightp'></p>
+
+<p>9.Analyzing the number of offers for different types of houses before the transaction </p>
+<button onclick="search_nine()">search</button>
+<br/><br>
+<p id = 'nine'></p>
+
+<p>4.Searching for *single house or other type of houses in a particular county* with desired bedrooms and bathrooms*.</p>
+<p>example input: </p>
+<input type="text" id="ten" name="ten" placeholder="county_name,number_of_bedroom, number_of_bathroom, type">
+<br/>
+<button onclick="search_ten()">search</button>
+<br/><br>
+<p id = 'tenp'></p>
+
 </body>
 <script>
+    function search_ten(){
+        let ten = document.getElementById('ten').value;
+        fetch('/ten/'+ten)
+            .then((response) => {
+                return response.json();
+            })
+            .then((myJson) => {
+                var html="result:<br><br>";
+                console.log(myJson);
+                for(let i = 0; i < myJson.length; ++i){
+                    let v = myJson[i];
+
+                    html+="hosue address: "+ v.address
+                        +"<br>"
+                        +"type: "+v.type+"<br>"
+                        +"price: "+v.listPrice+"<br>"
+                        +"numOfBath: "+v.numOfBath+"<br>"
+                        +"numOfBed: "+v.numOfBed+"<br>"
+                        +"sqft: "+v.sqft+"<br>"
+                        +"<br>________________________"
+                }
+                $("#tenp").html(html);
+            });
+    }
+    function search_nine(){
+        fetch('/nine')
+            .then((response) => {
+                return response.json();
+            })
+            .then((myJson) => {
+                var html="result:<br><br>";
+                console.log(myJson);
+                for(let i = 0; i < myJson.length; ++i){
+                    let v = myJson[i];
+
+                    html+="type: "+ v[0]
+                        +"<br>"
+                        +"max: "+v[1]+"<br>"
+                        +"min: "+v[2]+"<br>"
+                        +"<br>________________________<br/>"
+                }
+                $("#nine").html(html);
+            });
+    }
+    function search_eight(){
+        fetch('/eight/')
+            .then((response) => {
+                return response.json();
+            })
+            .then((myJson) => {
+                var html="result:<br><br>";
+                console.log(myJson);
+                for(let i = 0; i < myJson.length; ++i){
+                    let v = myJson[i];
+
+                    html+="payment method: "+ v[0]
+                        +"<br>"
+                        +"number of payment: "+v[1]+"<br>"
+                        +"<br>________________________<br/>"
+                }
+                $("#sevenp").html(html);
+            });
+    }
+    function search_seven(){
+        fetch('/seven/')
+            .then((response) => {
+                return response.json();
+            })
+            .then((myJson) => {
+                var html="result:<br><br>";
+                console.log(myJson);
+                for(let i = 0; i < myJson.length; ++i){
+                    let v = myJson[i];
+
+                    html+="payment method: "+ v[0]
+                        +"<br>"
+                        +"number of payment: "+v[1]+"<br>"
+                        +"<br>________________________<br/>"
+                }
+                $("#sevenp").html(html);
+            });
+    }
+    function search_six(){
+        fetch('/six/')
+            .then((response) => {
+                return response.json();
+            })
+            .then((myJson) => {
+                var html="result:<br><br>";
+                console.log(myJson);
+                for(let i = 0; i < myJson.length; ++i){
+                    let v = myJson[i];
+
+                    html+="mortgage company: "+ v[0]
+                        +"<br>"
+                        +"number of customers: "+v[1]+"<br>"
+                        +"<br>________________________<br/>"
+                }
+                $("#sixp").html(html);
+            });
+    }
     function search_five(){
         let five = document.getElementById('five').value;
         fetch('/five/')

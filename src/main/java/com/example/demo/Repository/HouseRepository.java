@@ -14,4 +14,8 @@ public interface HouseRepository extends JpaRepository<House, Long> {
     List<House> getall();
     House findById(long id);
     List<House> findByCounty(String county);
+    @Query(
+            value = "Select type, MAX(offers), MIN(offers) From house Where status ='Closed' Group by type",
+            nativeQuery = true)
+    List<Object[]> get_for_nine();
 }

@@ -41,17 +41,12 @@ Group by MortgageCompany;
 
 
 ##7 Analysizing payment method preference: 
-Select PaymentMethod, Count(*)
-From SalesContract
-group by PaymentMethod;
+Select PaymentMethod, Count(*) From SalesContract group by PaymentMethod;
 
 
 
 ##8 Checking the Selling and Purchasing transaction of each Branch office
-select T.BNO, T.BName, T.NumOfSale, T2.NumOfPurchase
-from
-(select B.BNO, BName, Count(*) NumOfSale
-from BranchOffice B, Agent A, Customer C, Sell S
+select T.BNO, T.BName, T.NumOfSale, T2.NumOfPurchase from (select B.BNO, BName, Count(*) NumOfSale from BranchOffice B, Agent A, Customer C, Sell S
 Where B.BNO=A.BNO and A.Aid=C.Cid and C.Cid=S.Sid
 group by BNO) T, 
 (Select B.BNO, BName, Count(*) NumOfPurchase
@@ -62,10 +57,7 @@ where T.BNO=T2.BNO
 order by BNO;
 
 ##9 Analyzing the number of offers for different types of houses before the transaction
-Select Type, MAX(Offers), MIN(Offers)
-From House
-Where Status ='Closed'
-Group by Type;
+Select Type, MAX(Offers), MIN(Offers) From House Where Status ='Closed' Group by Type;
 
 
 ##10 Searching for the houses with desired facilties

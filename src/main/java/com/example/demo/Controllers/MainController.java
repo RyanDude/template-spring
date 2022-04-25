@@ -407,10 +407,40 @@ public class MainController {
     }
     @RequestMapping("/five/")
     @ResponseBody
-    public void five(){
+    public List<fiveEntity> five(){
+        List<fiveEntity> res = new ArrayList<>();
         List<sell> s = sellRepository.getall();
         List<buy> b = buyRepository.getall();
+        //
         List<House> shouse = new ArrayList<>();
+        List<SaleContract> se = new ArrayList<>();
+        //
         List<House> bhouse = new ArrayList<>();
+        List<PurchaseContract> bu = new ArrayList<>();
+        for(sell x:s){
+            shouse.add(x.getHouse());
+            se.add(x.getSaleContract());
+        }
+        for(buy x:b){
+            bhouse.add(x.getHouse());
+            bu.add(x.getPurchaseContract());
+        }
+        return res;
+    }
+    @RequestMapping("/six")
+    @ResponseBody
+    public List<Object[]> six(){
+        List<Object[]> t = purchaseContractRepository.getMortgage();
+        return t;
+    }
+    @RequestMapping("/seven")
+    @ResponseBody
+    public List<Object[]> seven(){
+        return saleContractRepository.getPayMethod();
+    }
+    @RequestMapping("/nine")
+    @ResponseBody
+    public List<Object[]> nine(){
+        return houseRepository.get_for_nine();
     }
 }
