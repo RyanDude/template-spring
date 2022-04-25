@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <script th:src="@{lib/jquery.js}"></script>
+    <script th:src="@{js/jquery.cookie.js}"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #04AA6D;
+            color: white;
+        }
+        input{
+            width: 500px;
+            margin-left: 10%;
+            margin-bottom: 10px;
+            height: 30px;
+            position: relative;
+            border: 2px solid #cdcdcd;
+            border-color: rgba(0, 0, 0, .14);
+            background-color: AliceBlue;
+            font-size: 14px;
+        }
+        button {
+            margin-left: 10%;
+            background-color: #e1ecf4;
+            border-radius: 3px;
+            border: 1px solid #7aa7c7;
+            box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
+            box-sizing: border-box;
+            color: #39739d;
+            cursor: pointer;
+            display: inline-block;
+            font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1.15385;
+            outline: none;
+            padding: 8px .8em;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: baseline;
+            white-space: nowrap;
+        }
+
+        button:hover,
+        button:focus {
+            background-color: #b3d3ea;
+            color: #2c5777;
+        }
+
+        button:focus {
+            box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+        }
+
+        button:active {
+            background-color: #a0c7e4;
+            box-shadow: none;
+            color: #2c5777;
+        }
+
+    </style>
+</head>
+<body>
+<div class="topnav">
+    <a href="/">Home</a>
+    <a href="/insert">insert new data</a>
+    <a href="/update">update info</a>
+    <a href="/all">show all tables in DB</a>
+    <a class="active" href="/func">functionality</a>
+</div>
+<p>1.Search the information about the Agents and their cooperating partnership in a Branch office with office id</p>
+<input type="text" id="cor" name="cor" placeholder="Must be a Integer">
+<br/>
+<button onclick="search_cor()">search</button>
+<br/><br>
+<p id = 'corp'></p>
+<p>2.Searching for *inspectors(or other expertises) who can supply the qualified service.</p>
+<input type="text" id="two" name="two" placeholder="Must be a String">
+<br/>
+<button onclick="search_two()">search</button>
+<br/><br>
+<p id = 'twop'></p>
+
+<p>3.List houses zoned for the schools whose ratings are higher than *(7) in a particular county.</p>
+<input type="text" id="three" name="three" placeholder="county_name">
+<br/>
+<button onclick="search_three()">search</button>
+<br/><br>
+<p id = 'threep'></p>
+
+<p>4.Searching for *single house or other type of houses in a particular county* with desired bedrooms and bathrooms*.</p>
+<p>example input: Fulton,1,1,Townhouse</p>
+<input type="text" id="four" name="four" placeholder="county_name,number_of_bedroom, number_of_bathroom, type">
+<br/>
+<button onclick="search_four()">search</button>
+<br/><br>
+<p id = 'fourp'></p>
+
+<p>5.Retrieving the house information on the list price and closing price for market analysis</p>
+<p>click then return the result</p>
+<button onclick="search_five()">search</button>
+<br/><br>
+<p id = 'fivep'></p>
+
+</body>
+<script>
+    function search_five(){
+        let five = document.getElementById('five').value;
+        fetch('/five/')
+            .then((response) => {
+                return response.json();
+            })
+            .then((myJson) => {
+                var html="result:<br><br>";
+                console.log(myJson);
+                for(let i = 0; i < myJson.length; ++i){
+                    let v = myJson[i];
+
+                    html+="hosue address: "+ v.address
+                        +"<br>"
+                        +"type: "+v.type+"<br>"
+                        +"price: "+v.listPrice+"<br>"
+                        +"numOfBath: "+v.numOfBath+"<br>"
+                        +"numOfBed: "+v.numOfBed+"<br>"
+                        +"sqft: "+v.sqft+"<br>"
+                        +"<br>________________________"
+                }
+                $("#fivep").html(html);
+            });
+    }
+    function search_four(){
+        let four = document.getElementById('four').value;
+        fetch('/four/'+four)
+            .then((response) => {
+                return response.json();
+            })
+            .then((myJson) => {
+                var html="result:<br><br>";
+                console.log(myJson);
+                for(let i = 0; i < myJson.length; ++i){
+                    let v = myJson[i];
+
+                    html+="hosue address: "+ v.address
+                        +"<br>"
+                        +"type: "+v.type+"<br>"
+                        +"price: "+v.listPrice+"<br>"
+                        +"numOfBath: "+v.numOfBath+"<br>"
+                        +"numOfBed: "+v.numOfBed+"<br>"
+                        +"sqft: "+v.sqft+"<br>"
+                        +"<br>________________________"
+                }
+                $("#fourp").html(html);
+            });
+    }
+    function search_three(){
+        let three = document.getElementById('three').value;
+        fetch('/three/'+three)
+            .then((response) => {
+                return response.json();
+            })
+            .then((myJson) => {
+                var html="result:<br><br>";
+                console.log(myJson);
+                for(let i = 0; i < myJson.length; ++i){
+                    let v = myJson[i];
+                    let community = v.community;
+                    let school = community.school;
+                    html+="hosue address: "+ v.address
+                        +"<br>"
+                        +"community name: "+community.name
+                        +"<br>"
+                        +"elementary school: "+ school.elementary+", rate = "+school.e_rating+
+                        "<br/>middle school: "+ school.middle_school+", rate = "+school.m_rating+
+                        "<br/>high school: "+ school.high_school+", rate = "+school.h_rating
+                        +"<br>________________________"
+                }
+                $("#threep").html(html);
+            });
+    }
+    function search_two(){
+        let two = document.getElementById('two').value;
+        fetch('/two/'+two)
+            .then((response) => {
+                return response.json();
+            })
+            .then((myJson) => {
+                var html="result:<br><br>";
+                console.log(myJson);
+                for(let i = 0; i < myJson.length; ++i){
+                    let v = myJson[i];
+                    html+="name: "+ v.name
+                        +"<br>"
+                        +"phone: "+ v.phone
+                        +"<br>"+
+                        "yrExp: "+ v.yrExp
+                        +"<br>________________________"
+                }
+                $("#twop").html(html);
+            });
+    }
+    function search_cor(){
+        let cor = document.getElementById('cor').value;
+        fetch('/searchcor/'+cor)
+            .then((response) => {
+                return response.json();
+            })
+            .then((myJson) => {
+                var html="result:<br><br>";
+                for(let i = 0; i < myJson.length; ++i){
+                    let v = myJson[i];
+                    for(let j = 0; j < v.length; ++j){
+                        let v1 = v[j];
+                        html+="agent id: "+ v1.agent.id
+                            +"<br>"
+                            +"agent name: "+ v1.agent.name
+                            +"<br>"+
+                            "partner id: "+ v1.partner.id
+                            +"<br>"
+                            +"partner name: "+ v1.partner.name
+                            +"<br>________________________"
+                    }
+                }
+                $("#corp").html(html);
+            });
+    }
+</script>
+</html>

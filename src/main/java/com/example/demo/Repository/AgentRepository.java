@@ -1,6 +1,7 @@
 package com.example.demo.Repository;
 
 import com.example.demo.Entity.Agent;
+import com.example.demo.Entity.BranchOffice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,5 +16,9 @@ public interface AgentRepository extends JpaRepository<Agent, Long> {
             nativeQuery = true)
     List<Agent> getall();
     Agent findById(long id);
+    @Query(
+            value = "SELECT a.id FROM agent a where a.branch_office_id= :id ",
+            nativeQuery = true)
+    List<Integer> findByBranchOfficeId(@Param("id")int id);
 
 }

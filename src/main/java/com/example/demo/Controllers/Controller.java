@@ -20,4 +20,8 @@ public class Controller {
     public String update(){
         return "update";
     }
+    @RequestMapping("/func")
+    public String func(){
+        return "func";
+    }
 }

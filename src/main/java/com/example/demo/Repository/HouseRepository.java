@@ -13,4 +13,5 @@ public interface HouseRepository extends JpaRepository<House, Long> {
             nativeQuery = true)
     List<House> getall();
     House findById(long id);
+    List<House> findByCounty(String county);
 }

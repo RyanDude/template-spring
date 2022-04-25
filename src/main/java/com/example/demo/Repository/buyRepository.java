@@ -12,4 +12,5 @@ public interface buyRepository extends JpaRepository<buy, Long> {
             value = "SELECT * FROM buy",
             nativeQuery = true)
     List<buy> getall();
+
 }

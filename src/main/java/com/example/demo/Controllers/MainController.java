@@ -9,10 +9,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 public class MainController {
@@ -125,6 +122,7 @@ public class MainController {
         map.put("phone",3);
         map.put("email",4);
         map.put("agent",5);
+        map.put("id",6);
         Customer c = new Customer();
         for(String x:s){
             String[] t = x.split(":");
@@ -136,6 +134,7 @@ public class MainController {
                     case 3:c.setPhone(t[1]);break;
                     case 4:c.setEmail(t[1]);break;
                     case 5:c.setAgent(agentRepository.findById(Long.parseLong(t[1])));break;
+                    case 6:c.setId(customerRepository.findById(Long.parseLong(t[1])).getId());break;
                 }
             }else{return "Invalid input";}
         }
@@ -158,6 +157,7 @@ public class MainController {
         map.put("NumOfBed",9);
         map.put("NumOfBath",10);
         map.put("community",11);
+        map.put("id",12);
         House house = new House();
         for(String x:s){
             String[] t = x.split(":");
@@ -175,6 +175,7 @@ public class MainController {
                     case 9:house.setNumOfBed(Integer.parseInt(t[1]));break;
                     case 10:house.setNumOfBath(Integer.parseInt(t[1]));break;
                     case 11:house.setCommunity(communityRepository.findById(Long.parseLong(t[1])));break;
+                    case 12:house.setId(houseRepository.findById(Long.parseLong(t[1])).getId());break;
                 }
             }else{return "Invalid input";}
         }
@@ -193,6 +194,7 @@ public class MainController {
         map.put("YrExp",5);
         map.put("phone",6);
         map.put("branchOffice",7);
+        map.put("id",8);
         Agent agent = new Agent();
         for(String x:s){
             String[] t = x.split(":");
@@ -206,6 +208,7 @@ public class MainController {
                     case 5:agent.setYrExp(Integer.parseInt(t[1]));break;
                     case 6:agent.setPhone(t[1]);break;
                     case 7:agent.setBranchOffice(officeRepository.findById(Long.parseLong(t[1])));break;
+                    case 8:agent.setId(agentRepository.findById(Long.parseLong(t[1])).getId());break;
                 }
             }else{return "Invalid input";}
         }
@@ -223,6 +226,7 @@ public class MainController {
         map.put("m_rating",4);
         map.put("high_school",5);
         map.put("h_rating",6);
+        map.put("id",7);
         School school = new School();
         for(String x:s){
             String[] t = x.split(":");
@@ -235,6 +239,7 @@ public class MainController {
                     case 4:school.setM_rating(Integer.parseInt(t[1]));break;
                     case 5:school.setHigh_school(t[1]);break;
                     case 6:school.setH_rating(Integer.parseInt(t[1]));break;
+                    case 7:school.setId(schoolRepository.findById(Long.parseLong(t[1])).getId());break;
                 }
             }else{return "Invalid input";}
         }
@@ -250,6 +255,7 @@ public class MainController {
         map.put("Phone",2);
         map.put("Expertise",3);
         map.put("YrExp",4);
+        map.put("id",5);
         Partner partner = new Partner();
         for(String x:s){
             String[] t = x.split(":");
@@ -260,6 +266,7 @@ public class MainController {
                     case 2:partner.setPhone(t[1]);break;
                     case 3:partner.setExpertise(t[1]);break;
                     case 4:partner.setYrExp(t[1]);break;
+                    case 5:partner.setId(partnerRepository.findById(Long.parseLong(t[1])).getId());break;
                 }
             }else{return "Invalid input";}
         }
@@ -273,6 +280,7 @@ public class MainController {
         Map<String, Integer> map = new HashMap<>();
         map.put("agent",1);
         map.put("partner",2);
+        map.put("id",3);
         Corporate corporate = new Corporate();
         for(String x:s){
             String[] t = x.split(":");
@@ -281,6 +289,7 @@ public class MainController {
                 switch (val){
                     case 1:corporate.setAgent(agentRepository.findById(Long.parseLong(t[1])));break;
                     case 2:corporate.setPartner(partnerRepository.findById(Long.parseLong(t[1])));break;
+                    case 3:corporate.setId(corporateRepository.findById(Long.parseLong(t[1])).getId());break;
                 }
             }else{return "Invalid input";}
         }
@@ -295,6 +304,7 @@ public class MainController {
         map.put("date",1);
         map.put("sold_price",2);
         map.put("payment_method",3);
+        map.put("id",4);
         SaleContract saleContract = new SaleContract();
 
         for(String x:s){
@@ -305,6 +315,7 @@ public class MainController {
                     case 1:saleContract.setDate(Date.valueOf(java.time.LocalDate.now()));break;
                     case 2:saleContract.setSold_price(Double.parseDouble(t[1]));break;
                     case 3:saleContract.setPayment_method(t[1]);break;
+                    case 4:saleContract.setId(saleContractRepository.findById(Long.parseLong(t[1])).getId());break;
                 }
             }else{return "Invalid input";}
         }
@@ -318,6 +329,7 @@ public class MainController {
         Map<String, Integer> map = new HashMap<>();
         map.put("house",1);
         map.put("saleContract",2);
+        map.put("id",3);
         sell se = new sell();
         for(String x:s){
             String[] t = x.split(":");
@@ -326,10 +338,79 @@ public class MainController {
                 switch (val){
                     case 1:se.setHouse(houseRepository.findById(Long.parseLong(t[1])));break;
                     case 2:se.setSaleContract(saleContractRepository.findById(Long.parseLong(t[1])));break;
+                    case 3:se.setId(sellRepository.findById(Long.parseLong(t[1])).getId());break;
                 }
             }else{return "Invalid input";}
         }
         sellRepository.save(se);
         return "insert successfully";
+    }
+    @RequestMapping("/searchcor/{id}")
+    @ResponseBody
+    public List<List<Corporate>> functionality(@PathVariable int id){
+        List<List<Corporate>> res = new ArrayList<>();
+        List<Integer> agents = agentRepository.findByBranchOfficeId(id);
+        if(agents == null || agents.isEmpty()){return null;}
+        for(int a:agents){
+            List<Corporate> tmp = corporateRepository.findByAgent_id(a);
+            if(tmp!=null && !tmp.isEmpty()){
+                res.add(tmp);
+            }
+        }
+        return res;
+    }
+    @RequestMapping("/two/{str}")
+    @ResponseBody
+    public List<Partner> two(@PathVariable String str){
+        return partnerRepository.findByExpertise(str);
+    }
+    @RequestMapping("/three/{str}")
+    @ResponseBody
+    public List<House> three(@PathVariable String str){
+        String[] s = str.split(",");
+        String c = s[0];
+        List<House> res = new ArrayList<>();
+        List<House> houses = houseRepository.findByCounty(c);
+        if(houses!=null && !houses.isEmpty()){
+            for(House h:houses){
+                Community community = h.getCommunity();
+                if(community!=null){
+                    School sch = community.getSchool();
+                    if(sch!=null && sch.getE_rating()>7 && sch.getH_rating() > 7 && sch.getM_rating() > 7){
+                        res.add(h);
+                    }
+                }
+            }
+        }
+        return res;
+    }
+    @RequestMapping("/four/{str}")
+    @ResponseBody
+    public List<House> four(@PathVariable String str){
+        List<House> res = new ArrayList<>();
+        String[] s = str.split(",");
+        int number_of_bedroom = Integer.parseInt(s[1]);
+        int number_of_bathroom = Integer.parseInt(s[2]);
+        String type = s[3];
+        String county = s[0];
+        System.err.println(number_of_bedroom+","+number_of_bathroom+","+type+","+county);
+        List<House> houses = houseRepository.findByCounty(county);
+        if(houses!=null){
+            for(House house:houses){
+                if(house.getNumOfBath() >= number_of_bathroom && house.getNumOfBed() >= number_of_bedroom && house.getType().equals(type)){
+                    res.add(house);
+                }
+            }
+        }
+        System.err.println(res.size());
+        return res;
+    }
+    @RequestMapping("/five/")
+    @ResponseBody
+    public void five(){
+        List<sell> s = sellRepository.getall();
+        List<buy> b = buyRepository.getall();
+        List<House> shouse = new ArrayList<>();
+        List<House> bhouse = new ArrayList<>();
     }
 }

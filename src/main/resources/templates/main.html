@@ -34,6 +34,59 @@
             background-color: #04AA6D;
             color: white;
         }
+        input{
+            width: 500px;
+            margin-left: 10%;
+            margin-bottom: 10px;
+            height: 30px;
+            position: relative;
+            border: 2px solid #cdcdcd;
+            border-color: rgba(0, 0, 0, .14);
+            background-color: AliceBlue;
+            font-size: 14px;
+        }
+        button {
+            margin-left: 10%;
+            background-color: #e1ecf4;
+            border-radius: 3px;
+            border: 1px solid #7aa7c7;
+            box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
+            box-sizing: border-box;
+            color: #39739d;
+            cursor: pointer;
+            display: inline-block;
+            font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1.15385;
+            outline: none;
+            padding: 8px .8em;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: baseline;
+            white-space: nowrap;
+        }
+
+        button:hover,
+        button:focus {
+            background-color: #b3d3ea;
+            color: #2c5777;
+        }
+
+        button:focus {
+            box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+        }
+
+        button:active {
+            background-color: #a0c7e4;
+            box-shadow: none;
+            color: #2c5777;
+        }
+
     </style>
 </head>
 <body>
@@ -42,6 +95,7 @@
     <a href="/insert">insert new data</a>
     <a href="/update">update info</a>
     <a href="/all">show all tables in DB</a>
+    <a href="/func">functionality</a>
 </div>
 <!-- search specific record -->
 Search agent with agent's name:
@@ -58,7 +112,7 @@ Search agent with agent's name:
 
     function get_agent(){
         let name = document.getElementById('name').value;
-        console.log(name);
+
         $.ajax({
             type: 'POST',
             url: '/findagent/'+name,
@@ -67,6 +121,7 @@ Search agent with agent's name:
             dataType: "json",
             success: function (data) {
                 //need to change
+                console.log(data);
                 var obj=data;
                 var html="agent:<br><br>";
                 for(let i = 0; i < obj.length; ++i){
@@ -74,7 +129,7 @@ Search agent with agent's name:
                     var gender = obj[i].gender;
                     var BirthDate = obj[i].BirthDate;
                     var address = obj[i].address;
-                    var YrExp = obj[i].YrExp;
+                    var YrExp = obj[i].yrExp;
                     var phone = obj[i].phone;
                     html+="agent name: "+name
                         +"<br>"

@@ -12,4 +12,5 @@ public interface SellRepository extends JpaRepository<sell, Long> {
             value = "SELECT * FROM sell",
             nativeQuery = true)
     List<sell> getall();
+    sell findById(long id);
 }

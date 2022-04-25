@@ -18,7 +18,6 @@ insert into agent(name, gender, birth_date, phone, address, yr_exp, branch_offic
 insert into agent(name, gender, birth_date, phone, address, yr_exp, branch_office_id) values('Michelle Graves','F','1985-10-05','678-858-8461','255 Village Pkwy NE #140, Marietta, GA','15','4');
 insert into agent(name, gender, birth_date, phone, address, yr_exp, branch_office_id) values('Pamela Clark','F','1979-02-23','888-959-9461','1200 Johnson Ferry Rd Suite 210, Marietta, GA','16','4');
 
-insert into agent(name,yr_exp) values('test','1');
 
 insert into partner(name, expertise, phone, yr_exp) values('A total plumbing','Plumber','770-599-5144','19');
 insert into partner(name, expertise, phone, yr_exp) values('Accent Roofing Service','Roofing','770-824-1133','30');
