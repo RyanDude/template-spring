@@ -1,5 +1,5 @@
 # How to use it
-[] means command for the linux. For other system to run the app, it is probably different. <b>BUT as a programmer, why use windows?????</b>
+[     ] means command for the linux. For other system to run the app, it is probably different. <b>BUT as a programmer, why use windows?????</b>
 1. first install IDEA
 2. open MySQL in terminal[sudo mysql -u root -p] and type your database password to enter the database
 3. use MySQL to create the database named 'jg' [create database jg;]
