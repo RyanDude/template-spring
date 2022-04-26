@@ -98,12 +98,14 @@
     <a class="active" href="/func">functionality</a>
 </div>
 <p>1.Search the information about the Agents and their cooperating partnership in a Branch office with office id</p>
+example input: 1<br/>
 <input type="text" id="cor" name="cor" placeholder="Must be a Integer">
 <br/>
 <button onclick="search_cor()">search</button>
 <br/><br>
 <p id = 'corp'></p>
 <p>2.Searching for *inspectors(or other expertises) who can supply the qualified service.</p>
+example input: Plumber<br/>
 <input type="text" id="two" name="two" placeholder="Must be a String">
 <br/>
 <button onclick="search_two()">search</button>
@@ -111,6 +113,7 @@
 <p id = 'twop'></p>
 
 <p>3.List houses zoned for the schools whose ratings are higher than *(7) in a particular county.</p>
+example input: Fulton<br/>
 <input type="text" id="three" name="three" placeholder="county_name">
 <br/>
 <button onclick="search_three()">search</button>
@@ -151,9 +154,9 @@
 <br/><br>
 <p id = 'nine'></p>
 
-<p>4.Searching for *single house or other type of houses in a particular county* with desired bedrooms and bathrooms*.</p>
+<p>10.Searching for the houses with desired facilties</p>
 <p>example input: </p>
-<input type="text" id="ten" name="ten" placeholder="county_name,number_of_bedroom, number_of_bathroom, type">
+<input type="text" id="ten" name="ten" placeholder="fac">
 <br/>
 <button onclick="search_ten()">search</button>
 <br/><br>
@@ -173,14 +176,11 @@
                 for(let i = 0; i < myJson.length; ++i){
                     let v = myJson[i];
 
-                    html+="hosue address: "+ v.address
+                    html+="hosue id: "+ v[0]
                         +"<br>"
-                        +"type: "+v.type+"<br>"
-                        +"price: "+v.listPrice+"<br>"
-                        +"numOfBath: "+v.numOfBath+"<br>"
-                        +"numOfBed: "+v.numOfBed+"<br>"
-                        +"sqft: "+v.sqft+"<br>"
-                        +"<br>________________________"
+                        +"community name: "+v[1]+"<br>"
+                        +"hoafee: "+v[2]+"<br>"
+                        +"<br>________________________<br/>"
                 }
                 $("#tenp").html(html);
             });
@@ -216,12 +216,14 @@
                 for(let i = 0; i < myJson.length; ++i){
                     let v = myJson[i];
 
-                    html+="payment method: "+ v[0]
+                    html+="branch office id: "+ v[0]
                         +"<br>"
-                        +"number of payment: "+v[1]+"<br>"
+                        +"branch office name: "+v[1]+"<br>"
+                        +"number of sales: "+v[2]+"<br>"
+                        +"number of NumOfPurchase: "+v[3]+"<br>"
                         +"<br>________________________<br/>"
                 }
-                $("#sevenp").html(html);
+                $("#eightp").html(html);
             });
     }
     function search_seven(){
@@ -263,7 +265,6 @@
             });
     }
     function search_five(){
-        let five = document.getElementById('five').value;
         fetch('/five/')
             .then((response) => {
                 return response.json();
@@ -274,14 +275,11 @@
                 for(let i = 0; i < myJson.length; ++i){
                     let v = myJson[i];
 
-                    html+="hosue address: "+ v.address
+                    html+="hosue id: "+ v[0]
                         +"<br>"
-                        +"type: "+v.type+"<br>"
-                        +"price: "+v.listPrice+"<br>"
-                        +"numOfBath: "+v.numOfBath+"<br>"
-                        +"numOfBed: "+v.numOfBed+"<br>"
-                        +"sqft: "+v.sqft+"<br>"
-                        +"<br>________________________"
+                        +"list price: "+v[0]+"<br>"
+                        +"sold price: "+v[2]+"<br>"
+                        +"<br>________________________<br/>"
                 }
                 $("#fivep").html(html);
             });
@@ -305,7 +303,7 @@
                         +"numOfBath: "+v.numOfBath+"<br>"
                         +"numOfBed: "+v.numOfBed+"<br>"
                         +"sqft: "+v.sqft+"<br>"
-                        +"<br>________________________"
+                        +"<br>________________________<br/>"
                 }
                 $("#fourp").html(html);
             });
@@ -330,7 +328,7 @@
                         +"elementary school: "+ school.elementary+", rate = "+school.e_rating+
                         "<br/>middle school: "+ school.middle_school+", rate = "+school.m_rating+
                         "<br/>high school: "+ school.high_school+", rate = "+school.h_rating
-                        +"<br>________________________"
+                        +"<br>________________________<br/>"
                 }
                 $("#threep").html(html);
             });
@@ -351,7 +349,7 @@
                         +"phone: "+ v.phone
                         +"<br>"+
                         "yrExp: "+ v.yrExp
-                        +"<br>________________________"
+                        +"<br>________________________<br/>"
                 }
                 $("#twop").html(html);
             });

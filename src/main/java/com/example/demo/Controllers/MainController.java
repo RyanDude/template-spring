@@ -136,7 +136,10 @@ public class MainController {
                     case 5:c.setAgent(agentRepository.findById(Long.parseLong(t[1])));break;
                     case 6:c.setId(customerRepository.findById(Long.parseLong(t[1])).getId());break;
                 }
-            }else{return "Invalid input";}
+            }else{
+                System.err.println(t[1]);
+                return "Invalid input";
+            }
         }
         customerRepository.save(c);
         return "insert successfully";
@@ -407,25 +410,8 @@ public class MainController {
     }
     @RequestMapping("/five/")
     @ResponseBody
-    public List<fiveEntity> five(){
-        List<fiveEntity> res = new ArrayList<>();
-        List<sell> s = sellRepository.getall();
-        List<buy> b = buyRepository.getall();
-        //
-        List<House> shouse = new ArrayList<>();
-        List<SaleContract> se = new ArrayList<>();
-        //
-        List<House> bhouse = new ArrayList<>();
-        List<PurchaseContract> bu = new ArrayList<>();
-        for(sell x:s){
-            shouse.add(x.getHouse());
-            se.add(x.getSaleContract());
-        }
-        for(buy x:b){
-            bhouse.add(x.getHouse());
-            bu.add(x.getPurchaseContract());
-        }
-        return res;
+    public List<Object[]> five(){
+        return houseRepository.get_for_five();
     }
     @RequestMapping("/six")
     @ResponseBody
@@ -438,9 +424,19 @@ public class MainController {
     public List<Object[]> seven(){
         return saleContractRepository.getPayMethod();
     }
+    @RequestMapping("/eight")
+    @ResponseBody
+    public List<Object[]> eight(){
+        return agentRepository.for_eight();
+    }
     @RequestMapping("/nine")
     @ResponseBody
     public List<Object[]> nine(){
         return houseRepository.get_for_nine();
+    }
+    @RequestMapping("/ten/{str}")
+    @ResponseBody
+    public List<Object[]> ten(@PathVariable String str){
+        return houseRepository.get_for_ten(str);
     }
 }

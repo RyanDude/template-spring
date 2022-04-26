@@ -25,8 +25,7 @@ Where H.type = 'single house' and County= 'Fulton'and NumOfBed >=3 and NumOfBath
 
 
 ##5 Retrieving the house information on the list price and closing price for market analysis
-Select H.HNO, ListPrice, SoldPrice
-From House H, Sell SE, SalesContract SA
+Select H.HNO, ListPrice, SoldPrice From House H, Sell SE, SalesContract SA
 Where H.HNO= SE.HNO and SE.SCNO = SA.SCNO
 Union
 Select H.HNO, ListPrice, PurchasePrice
@@ -61,6 +60,4 @@ Select Type, MAX(Offers), MIN(Offers) From House Where Status ='Closed' Group by
 
 
 ##10 Searching for the houses with desired facilties
-Select HNO, CommName, HOAfee
-From House H, Community C
-Where H.CMid= C.CMid and Facility like '%Pool%'; 
+Select HNO, CommName, HOAfee From House H, Community C Where H.CMid= C.CMid and Facility like '%Pool%';
