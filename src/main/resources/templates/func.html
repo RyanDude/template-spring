@@ -104,7 +104,7 @@ example input: 1<br/>
 <button onclick="search_cor()">search</button>
 <br/><br>
 <p id = 'corp'></p>
-<p>2.Searching for *inspectors(or other expertises) who can supply the qualified service.</p>
+<p>2.Searching all partner(or other expertises) who can supply the qualified service.</p>
 example input: Plumber<br/>
 <input type="text" id="two" name="two" placeholder="Must be a String">
 <br/>
@@ -155,7 +155,7 @@ example input: Fulton<br/>
 <p id = 'nine'></p>
 
 <p>10.Searching for the houses with desired facilties</p>
-<p>example input: </p>
+<p>example input: Pool</p>
 <input type="text" id="ten" name="ten" placeholder="fac">
 <br/>
 <button onclick="search_ten()">search</button>
@@ -277,7 +277,7 @@ example input: Fulton<br/>
 
                     html+="hosue id: "+ v[0]
                         +"<br>"
-                        +"list price: "+v[0]+"<br>"
+                        +"list price: "+v[1]+"<br>"
                         +"sold price: "+v[2]+"<br>"
                         +"<br>________________________<br/>"
                 }
@@ -373,7 +373,7 @@ example input: Fulton<br/>
                             "partner id: "+ v1.partner.id
                             +"<br>"
                             +"partner name: "+ v1.partner.name
-                            +"<br>________________________"
+                            +"<br>________________________<br/>"
                     }
                 }
                 $("#corp").html(html);
